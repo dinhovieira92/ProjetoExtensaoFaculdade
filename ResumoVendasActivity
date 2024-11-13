@@ -1,0 +1,36 @@
+package com.pedrovieira.aplicativoprojetoextensao
+
+import android.os.Bundle
+import android.widget.ListView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+
+class ResumoVendasActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_resumo_vendas)
+
+        val textTotalVendas = findViewById<TextView>(R.id.text_total_vendas)
+
+        val vendas = listOf(
+            Venda("Produto A", 0.0),
+            Venda("Produto B", 0.0),
+            Venda("Produto D", 0.0),
+            Venda("Produto E", 0.0),
+            Venda("Produto F", 0.0),
+            Venda("Produto G", 0.0),
+            Venda("Produto H", 0.0),
+            Venda("Produto I", 0.0),
+            Venda("Produto J", 0.0),
+            Venda("Produto K", 0.0),
+        )
+
+        val totalVendas = vendas.sumOf { it.precoProduto }
+        textTotalVendas.text = "Total de Vendas: R$ %.2f".format(totalVendas)
+
+        val listVendas = findViewById<ListView>(R.id.list_vendas)
+        val vendaAdapter = VendaAdapter(this, vendas)
+
+        listVendas.adapter = vendaAdapter
+    }
+}
