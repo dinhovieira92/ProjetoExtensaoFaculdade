@@ -1,0 +1,40 @@
+package com.pedrovieira.aplicativoprojetoextensao
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.BaseAdapter
+
+class VendaAdapter(
+    private val context: Context,
+    private val vendas: List<Venda>
+) : BaseAdapter() {
+
+    override fun getCount(): Int {
+        return vendas.size
+    }
+
+    override fun getItem(position: Int): Any {
+        return vendas[position]
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val venda = getItem(position) as Venda
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.item_venda, parent, false)
+
+        val nomeProduto = view.findViewById<TextView>(R.id.text_nome_produto)
+        val precoProduto = view.findViewById<TextView>(R.id.text_preco_produto)
+
+        nomeProduto.text = venda.nomeProduto
+        precoProduto.text = "R$ %.2f".format(venda.precoProduto)
+
+        return view
+    }
+}
