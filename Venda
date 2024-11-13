@@ -1,0 +1,5 @@
+package com.pedrovieira.aplicativoprojetoextensao
+
+data class Venda(
+    val nomeProduto: String,
+    val precoProduto: Double)
